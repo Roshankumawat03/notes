@@ -133,6 +133,11 @@ export default function AllNotes() {
       setAllnotes((prev) => prev.filter((n) => n.id !== id));
     };
 
+    const handleVoiceResult = (transcript) => {
+      setSearchText(transcript);
+      setFinalSearch(transcript.trim());
+    };
+
 
       const filterNotes=allnotes.filter((ele)=>{
         if(!finalSearch.trim()) return true;
@@ -157,7 +162,13 @@ export default function AllNotes() {
 
     return (
         <div className="dashboard-container">
-            <Header onToggle={handleToggle} searchText={searchText} onSearch={setSearchText} onSearchClick={()=>setFinalSearch(searchText.trim())} />
+            <Header
+                onToggle={handleToggle}
+                searchText={searchText}
+                onSearch={setSearchText}
+                onSearchClick={() => setFinalSearch(searchText.trim())}
+                onVoiceResult={handleVoiceResult}
+            />
 
             <div className="dashboard-wrapper">
                 <Sidebar collapsed={collapsed} mobileOpen={mobileOpen} />
